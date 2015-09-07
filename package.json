@@ -18,6 +18,7 @@
     "jasmine": "^2.3.2"
   },
   "scripts": {
+    "start": "node app.js",
     "test": "jasmine JASMINE_CONFIG_PATH=build/jasmine-unit-test.json",
     "deploy": "git push heroku master"
   }
