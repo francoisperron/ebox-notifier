@@ -8,13 +8,13 @@
         var transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
-                user: 'fperron@gmail.com',
+                user: 'ebox.notifier@gmail.com',
                 pass: pass
             }
         });
 
         var mailOptions = {
-            from: 'eb-notifier <fperron@gmail.com>',
+            from: 'ebox-notifier <ebox.notifier@gmail.com>',
             to: 'fperron@gmail.com,philemon.perron@gmail.com',
             subject: 'Utilisation Electronic Box',
             html: '<b>Utilisation: ' + usage + '</b>'
