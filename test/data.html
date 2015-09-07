@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<link rel="shortcut icon" href="https://secure.electronicbox.net/favicon.ico" type="image/x-icon" /><html>
+<title>EBOX - INTERNET USAGE</title>
+<head>
+
+    <link rel="stylesheet" href="css/style_portal.css?v=1" type='text/css'>
+
+    <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+    <script language='javascript'>
+
+
+
+        google.load('visualization', '1', {packages:['gauge']});
+
+
+        function drawChart(Jusage, Jmax) {
+            var posRed = Jmax - (Jmax * 20 / 100);
+            var posYellow = posRed - (posRed * 20 / 100);
+
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['USAGE', Jusage]
+            ]);
+
+
+            var options = {
+                width: 400, height: 150,
+                max:Jmax,
+                animation:{
+                    duration: 2000,
+                    easing: 'in',
+                },
+                redColor: '#DC3912',
+                redFrom: posRed, redTo: Jmax,
+                yellowFrom:posYellow, yellowTo: posRed,
+                minorTicks: 5
+            };
+
+            var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        var msgJS = new Array();
+        msgJS[11] = "Détails";
+        msgJS[12] = "Utilisation à ce jour";
+        msgJS[19] = "Date";
+        msgJS[21] = "Total";
+        msgJS[22] = "Entrant";
+        msgJS[23] = "Sortant";
+        msgJS[34] = "* utilisation off peak";
+        msgJS[35] = "commence le :";
+        msgJS[36] = "(exclu le crédit off peak)";
+        msgJS[42] = "Utilisation";
+    </script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/script.js?v=6"></script>
+</head>
+
+
+<body>
+
+
+
+<div id='divWaitGrey' class='waitgrey hidden'></div>
+<div id='waiticon' class='hidden'><span class="waiticon"><img src='images/logo.png' style='padding-left:15px;'><br><img src='images/wait.gif' style='padding-top:10px; padding-left:5px;'></span></div>
+<div id='header'>
+
+
+</div>
+
+
+<div id='divListAll'>
+    <input type='hidden' id='path1' name='path1' value='https://secure.electronicbox.net/web_order/index.php'>
+    <input type='hidden' id='path2' name='path2' value='https://secure.electronicbox.net/web_order/index_block.php'>
+
+
+    <form id='formGab' name='formGab' action=''>
+        <input type='hidden' id='lngGab' name='lngGab' value='fr'>
+        <input type='hidden' id='codeGab' name='codeGab' value='VLBUUXFQ'>
+    </form>
+
+    <center><br><br><table border='0' width='900px' cellspacing='0' cellpadding='2'><tr>
+        <td width='5%' style='border-top-left-radius: 8px;'>&nbsp;</td>
+        <td width='90%' valign='top' colspan='2'>&nbsp;</td>
+        <td width='5%' style='border-top-right-radius: 8px;'><select id='lng' name='lng'><option value='en' >English</option><option value='fr' selected>Français</option></select></td></tr><tr>
+        <td class='table_header' width='5%' style='border-top-left-radius: 8px;'>&nbsp;</td>
+        <td class='table_header' width='90%' valign='top' colspan='2'><input type='hidden' name='code' id='code' value='PF12'><input type='hidden' name='fix_lng' id='fix_lng' value='fr'> PF12</td>
+        <td class='table_header' width='5%' style='border-top-right-radius: 8px;'></td>
+    </tr><tr class='table_white'><td width='100%' colspan='4' valign='top'>&nbsp;</td></tr><tr class='table_white'>
+        <td width='5%'>&nbsp;</td>
+        <td width='65%' valign='bottom' align='left'><table border='0' width='100%' cellspacing='0' cellpadding='0'><tr><td width='45%' class='nobr'><div style='padding-top:3px;'><b>Plan :</b> Cable HV + 15 Mbits 350 GB</div><td width='25%'>&nbsp;</td><td>&nbsp;</td></tr><tr><td width='45%' class='nobr'><div style='padding-top:3px;'><b>Extra :</b> 0 x 75 GB</div><td width='25%'>&nbsp;</td><td><input type='button' value='Ajout de blocs' class='button_order order_block'></td></tr><tr><td width='45%' class='nobr'><div style='padding-top:3px;' class='nobr'><b>Total du forfait :</b> 350 G</div><td width='25%'>&nbsp;</td><td>&nbsp;</td></tr><tr><td width='45%' class='nobr'><div style='padding-top:3px;'><b>Disponible :</b> 198.05 G</div><td width='25%'>&nbsp;</td><td>&nbsp;</td></tr><tr><td width='45%' class='nobr'><div style='padding-top:3px;'><b>Option Super off peak :</b> NON </div><td width='25%'><a href='javascript:void(0);' id='moreInfo'>plus d'info?</a></td><td><input type='button' value='Activer cette option' class='button_order order_offpeak'></td></tr></td></tr></table></td>
+        <td width='25%' valign='top' valign='top' align='right' ><div id='chart_div'></div></td>
+        <td width='5%'>&nbsp;</td>
+    </tr><tr class='table_white'>	<td width='5%'>&nbsp;</td>	<td width='90%' valign='bottom' align='left' colspan='2'><div id='divMoreInfo' class='hidden'>		<div class='panel'>&nbsp;</div>		<div class='under_panel'><br>		<span style='color:#5A2E2C;'>L'OPTION SUPER OFF PEAK</span><br><br>L'option Super off peak permet :<ul class='offpeak_list'><li>Une utilisation ILLIMITÉE entre 02h00 et 14h00, <b>7 jours sur 7</b>.</li><li>Le téléversement (upload) ILLIMITÉ <b>en tout temps</b>.</li></ul>Activation de l'option: <ul class='offpeak_list'><li>Coût : 4,95$ / mois</li><li>L'option <b>n'est pas rétroactive</b>. Ce qui signifie que nous débutons le calcul de votre consommation off peak <b>le jour</b> où vous activez cette option.</li><li>Le frais de 4,95$ est récurrent et chargé à partir du mois en cours, peut importe le nombre de jours restant à ce mois.</li><li>Vous pourrez annuler cette option après le premier mois. Pour ce faire, vous devrez contacter un de nos agents</li></ul>		<br><input type='button' value='Activer cette option' class='button_order order_offpeak'>		<br><br>		</div>		</div></div></td>	<td width='5%'>&nbsp;</td></tr><script>google.setOnLoadCallback(function(){ drawChart(151.95, 350) }); </script><tr class='table_white'>
+    <td width='5%'>&nbsp;</td>
+    <td width='65%' valign='top' align='left'><b>Sept - 2015</b></td>
+    <td width='25%' valign='top' align='right'>&nbsp;</td>
+    <td width='5%'>&nbsp;</td>
+</tr><tr class='table_white'>		<td width='5%'>&nbsp;</td>		<td width='90%' valign='top' colspan='2'><center><br><table border='0' width='100%' cellspacing='0' cellpadding='2'><tr class='table_white'>		<td width='30px'>&nbsp;</td>		<td align='center' valign='top'><table class='table_block' border='1' width='100%' cellspacing='0' cellpadding='2'><tr><td width='100%' class='table_header' colspan='3'>Utilisation à ce jour</td></tr><tr><td width='33%' class='table_white td_block' style='text-align: center;'><span class='txtdata'><b>Entrant</b><br>146.65 G<br><div id='down_off' class='txt_offpeak hidden' style='text-align: center;'><img src='images/iconwait2.gif' border='0'></div></span></td><td width='33%' class='table_white td_block' style='text-align: center;'><span class='txtdata'><b>Sortant</b><br>5.3 G<br><div id='up_off' class='txt_offpeak hidden' style='text-align: center;'><img src='images/iconwait2.gif' border='0'></div></span></td><td width='33%' class='table_white td_block' style='text-align: center;'><span class='txtdata'><b>Total</b><br>151.95 G<br><div id='total_off' class='txt_offpeak hidden' style='text-align: center;'><img src='images/iconwait2.gif' border='0'></div></span></td></tr></table><div style='font-size:12px;' align='left' class='txt_offpeak hidden' id='star_off'>* utilisation off peak</div>		</td>		<td width='30px' class='table_white'>&nbsp;</td></tr></table></td><td width='5%'>&nbsp;</td></tr><tr class='table_white'><td width='100%' colspan='4' valign='top'>&nbsp;</td></tr><tr class='table_white'>
+    <td width='5%'>&nbsp;</td>
+    <td width='90%' valign='top' align='left' colspan='2'><a href='javascript:void(0);' onClick="showhide('div1');"><img src='images/plus.png' id='img_div1' border='0' style='float:left;'>Détails</a></td>
+    <td width='5%'>&nbsp;</td>
+</tr><tr class='table_white'>		<td width='5%'>&nbsp;</td>		<td width='90%' valign='top' align='left' colspan='2'><div id='div1' class='hidden'><center><table border=0 width=95% cellspacing='0' cellpadding='2'><tr class='table_header'><td width='25%' style='padding-left: 5px;'>Date</td><td width='25%' align='right'>Download</td><td width='25%' align='right'>Upload</td><td width='25%' align='right' style='padding-right: 5px;'>Total</td></tr><tr class='table_white'><td width='25%' style='padding-left: 5px;'>2015-09-06&nbsp;&nbsp;&nbsp;<a href='javascript:void(0);' onClick="showhide('divDaily');"><img src='images/plus.png' id='img_divDaily' border='0'></a></td><td width='25%' align='right'>2.6803 G</td><td width='25%' align='right'>0.1655 G</td><td width='25%' align='right' style='padding-right: 5px;'>2.846 G</td></tr><tr class='table_header2'><td width='100%' style='padding-left: 5px;' colspan='4'><div class='hidden' id='divDaily'><center><br><table border='0' width='98%' cellpadding='0' cellspacing='0'><tr><td width='100%' colspan='4'><div class='panel'>&nbsp;</div></td></tr><tr  style='background-color:#FFFFFF;'><td width='25%' style='padding-left: 5px;' class=''>18:00 h - 19:00 h</td><td width='25%' align='right' class=''>0.2871 G</td><td width='25%' align='right' class=''>0.0056 G</td><td width='25%' align='right' style='padding-right: 5px;' class=''>0.2927 G</td></tr><tr  style='background-color:#FFFFFF;'><td width='25%' style='padding-left: 5px;' class=''>17:00 h - 18:00 h</td><td width='25%' align='right' class=''>0.0412 G</td><td width='25%' align='right' class=''>0.0045 G</td><td width='25%' align='right' style='padding-right: 5px;' class=''>0.0457 G</td></tr><tr  style='background-color:#FFFFFF;'><td width='25%' style='padding-left: 5px;' class=''>16:00 h - 17:00 h</td><td width='25%' align='right' class=''>0.503 G</td><td width='25%' align='right' class=''>0.0038 G</td><td width='25%' align='right' style='padding-right: 5px;' class=''>0.5068 G</td></tr><tr  style='background-color:#FFFFFF;'><td width='25%' style='padding-left: 5px;' class=''>15:00 h - 16:00 h</td><td width='25%' align='right' class=''>0.1336 G</td><td width='25%' align='right' class=''>0.0035 G</td><td width='25%' align='right' style='padding-right: 5px;' class=''>0.1371 G</td></tr><tr  style='background-color:#FFFFFF;'><td width='25%' style='padding-left: 5px;' class=''>14:00 h - 15:00 h</td><td width='25%' align='right' class=''>0.0421 G</td><td width='25%' align='right' class=''>0.0032 G</td><td width='25%' align='right' style='padding-right: 5px;' class=''>0.0452 G</td></tr><tr  style='background-color:#FFFFFF;'><td width='25%' style='padding-left: 5px;' class=''>13:00 h - 14:00 h</td><td width='25%' align='right' class=''>0.0307 G</td><td width='25%' align='right' class=''>0.0061 G</td><td width='25%' align='right' style='padding-right: 5px;' class=''>0.0368 G</td></tr><tr  style='background-color:#FFFFFF;'><td width='25%' style='padding-left: 5px;' class=''>12:00 h - 13:00 h</td><td width='25%' align='right' class=''>0.0774 G</td><td width='25%' align='right' class=''>0.0075 G</td><td width='25%' align='right' style='padding-right: 5px;' class=''>0.0849 G</td></tr><tr  style='background-color:#FFFFFF;'><td width='25%' style='padding-left: 5px;' class=''>11:00 h - 12:00 h</td><td width='25%' align='right' class=''>0.1741 G</td><td width='25%' align='right' class=''>0.0365 G</td><td width='25%' align='right' style='padding-right: 5px;' class=''>0.2106 G</td></tr><tr  style='background-color:#FFFFFF;'><td width='25%' style='padding-left: 5px;' class=''>10:00 h - 11:00 h</td><td width='25%' align='right' class=''>0.5525 G</td><td width='25%' align='right' class=''>0.0419 G</td><td width='25%' align='right' style='padding-right: 5px;' class=''>0.5944 G</td></tr><tr  style='background-color:#FFFFFF;'><td width='25%' style='padding-left: 5px;' class=''>09:00 h - 10:00 h</td><td width='25%' align='right' class=''>0.4532 G</td><td width='25%' align='right' class=''>0.0373 G</td><td width='25%' align='right' style='padding-right: 5px;' class=''>0.4906 G</td></tr><tr  style='background-color:#FFFFFF;'><td width='25%' style='padding-left: 5px;' class=''>08:00 h - 09:00 h</td><td width='25%' align='right' class=''>0.043 G</td><td width='25%' align='right' class=''>0.0032 G</td><td width='25%' align='right' style='padding-right: 5px;' class=''>0.0462 G</td></tr><tr  style='background-color:#FFFFFF;'><td width='25%' style='padding-left: 5px;' class=''>07:00 h - 08:00 h</td><td width='25%' align='right' class=''>0.0134 G</td><td width='25%' align='right' class=''>0.0012 G</td><td width='25%' align='right' style='padding-right: 5px;' class=''>0.0147 G</td></tr><tr  style='background-color:#FFFFFF;'><td width='25%' style='padding-left: 5px;' class=''>06:00 h - 07:00 h</td><td width='25%' align='right' class=''>0.0151 G</td><td width='25%' align='right' class=''>0.0012 G</td><td width='25%' align='right' style='padding-right: 5px;' class=''>0.0163 G</td></tr><tr  style='background-color:#FFFFFF;'><td width='25%' style='padding-left: 5px;' class=''>05:00 h - 06:00 h</td><td width='25%' align='right' class=''>0.0183 G</td><td width='25%' align='right' class=''>0.0013 G</td><td width='25%' align='right' style='padding-right: 5px;' class=''>0.0196 G</td></tr><tr  style='background-color:#FFFFFF;'><td width='25%' style='padding-left: 5px;' class=''>04:00 h - 05:00 h</td><td width='25%' align='right' class=''>0.0126 G</td><td width='25%' align='right' class=''>0.0013 G</td><td width='25%' align='right' style='padding-right: 5px;' class=''>0.0139 G</td></tr><tr  style='background-color:#FFFFFF;'><td width='25%' style='padding-left: 5px;' class=''>03:00 h - 04:00 h</td><td width='25%' align='right' class=''>0.0187 G</td><td width='25%' align='right' class=''>0.0014 G</td><td width='25%' align='right' style='padding-right: 5px;' class=''>0.0201 G</td></tr><tr  style='background-color:#FFFFFF;'><td width='25%' style='padding-left: 5px;' class=''>02:00 h - 03:00 h</td><td width='25%' align='right' class=''>0.1096 G</td><td width='25%' align='right' class=''>0.0019 G</td><td width='25%' align='right' style='padding-right: 5px;' class=''>0.1115 G</td></tr><tr  style='background-color:#FFFFFF;'><td width='25%' style='padding-left: 5px;' class=''>01:00 h - 02:00 h</td><td width='25%' align='right' class=''>0.0092 G</td><td width='25%' align='right' class=''>0.002 G</td><td width='25%' align='right' style='padding-right: 5px;' class=''>0.0112 G</td></tr><tr  style='background-color:#FFFFFF;'><td width='25%' style='padding-left: 5px;' class=''>00:00 h - 01:00 h</td><td width='25%' align='right' class=''>0.1454 G</td><td width='25%' align='right' class=''>0.0022 G</td><td width='25%' align='right' style='padding-right: 5px;' class=''>0.1476 G</td></tr></table></center><br><div></td></tr><tr class='table_header2'><td width='25%' style='padding-left: 5px;'>2015-09-05</td><td width='25%' align='right'>7.5219 G</td><td width='25%' align='right'>0.3546 G</td><td width='25%' align='right' style='padding-right: 5px;'>7.8765 G</td></tr><tr class='table_white'><td width='25%' style='padding-left: 5px;'>2015-09-04</td><td width='25%' align='right'>87.6928 G</td><td width='25%' align='right'>3.3797 G</td><td width='25%' align='right' style='padding-right: 5px;'>91.0724 G</td></tr><tr class='table_header2'><td width='25%' style='padding-left: 5px;'>2015-09-03</td><td width='25%' align='right'>19.4885 G</td><td width='25%' align='right'>0.4164 G</td><td width='25%' align='right' style='padding-right: 5px;'>19.9049 G</td></tr><tr class='table_white'><td width='25%' style='padding-left: 5px;'>2015-09-02</td><td width='25%' align='right'>12.8941 G</td><td width='25%' align='right'>0.7 G</td><td width='25%' align='right' style='padding-right: 5px;'>13.5942 G</td></tr><tr class='table_header2'><td width='25%' style='padding-left: 5px;'>2015-09-01</td><td width='25%' align='right'>16.3689 G</td><td width='25%' align='right'>0.2837 G</td><td width='25%' align='right' style='padding-right: 5px;'>16.6526 G</td></tr><tr class='table_white'><td width='25%' style='padding-left: 5px;'>&nbsp;</td><td width='75%' align='right' colspan='3' style='font-style:italic; font-size:8pt;'><hr class='hr_menu'></td></tr><tr class='table_white'><td width='25%' style='padding-left: 5px;'>&nbsp;</td><td width='25%' align='right' style='font-weight:bold;'>146.65 G</td><td width='25%' align='right' style='font-weight:bold;'>5.3 G</td><td width='25%' align='right' style='font-weight:bold; padding-right: 5px;'>151.95 G</td></tr></table></center></div></td>		<td width='5%'>&nbsp;</td></tr><tr class='table_white'><td width='100%' colspan='4' valign='top'>&nbsp;</td></tr><tr class='table_white'>
+    <td width='5%'>&nbsp;</td>
+    <td width='65%' valign='top' align='left'><b>Août - 2015</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='left-padding:15px;' id='spanLink_08-2015'><a href='javascript:displayMonth("08", "2015");'>Charger</a></span></td>
+    <td width='25%' valign='top' align='right'>&nbsp;</td>
+    <td width='5%'>&nbsp;</td>
+</tr><tr class='table_white'>
+    <td width='5%'>&nbsp;</td>
+    <td width='90%' valign='top' align='left' colspan='2'><span style='left-padding:15px;' id='spanWait_08-2015'></span><div id='divMonth_08-2015' class=''></div></td>
+    <td width='5%'>&nbsp;</td>
+</tr><tr class='table_white'>
+    <td width='5%'>&nbsp;</td>
+    <td width='65%' valign='top' align='left'><b>Juillet - 2015</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='left-padding:15px;' id='spanLink_07-2015'><a href='javascript:displayMonth("07", "2015");'>Charger</a></span></td>
+    <td width='25%' valign='top' align='right'>&nbsp;</td>
+    <td width='5%'>&nbsp;</td>
+</tr><tr class='table_white'>
+    <td width='5%'>&nbsp;</td>
+    <td width='90%' valign='top' align='left' colspan='2'><span style='left-padding:15px;' id='spanWait_07-2015'></span><div id='divMonth_07-2015' class=''></div></td>
+    <td width='5%'>&nbsp;</td>
+</tr><tr>
+    <td class='table_white' width='5%'>&nbsp;</td>
+    <td class='table_white' width='90%' valign='top' colspan='2'></td>
+    <td class='table_white' width='5%'></td><tr class='table_white'><td width='100%' colspan='4' valign='top'>&nbsp;</td></tr></table>
+</div>
+<br><br><br>
+</body>
+</html>

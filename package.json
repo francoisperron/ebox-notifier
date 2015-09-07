@@ -1,0 +1,24 @@
+{
+  "name": "ebox-notifier",
+  "version": "1.0.0",
+  "description": "Email notification for electronic box internet usage",
+  "author": "fperron@gmail.com",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:francoisperron/ebox-notifier.git"
+  },
+  "engines": {
+    "node": "0.12.x"
+  },
+  "dependencies": {
+    "nodemailer": "^1.4.0"
+  },
+  "devDependencies": {
+    "jasmine": "^2.3.2"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test": "jasmine JASMINE_CONFIG_PATH=build/jasmine-unit-test.json"
+  }
+}
