@@ -19,6 +19,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "test": "jasmine JASMINE_CONFIG_PATH=build/jasmine-unit-test.json"
+    "test": "jasmine JASMINE_CONFIG_PATH=build/jasmine-unit-test.json",
+    "deploy": "git push heroku master"
   }
 }
