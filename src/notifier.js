@@ -13,10 +13,11 @@
             }
         });
 
+        var date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
         var mailOptions = {
             from: 'ebox-notifier <ebox.notifier@gmail.com>',
             to: 'fperron@gmail.com,philemon.perron@gmail.com',
-            subject: 'Utilisation Electronic Box',
+            subject: 'Utilisation Electronic Box - ' + date,
             html: '<b>Utilisation: ' + usage + '</b>'
         };
 
