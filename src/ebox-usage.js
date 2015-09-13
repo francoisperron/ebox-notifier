@@ -2,12 +2,17 @@
 
 var http = require('http');
 
-exports.get = function(code, done) {
+var EboxUsage = function (parser) {
+    this.parser = parser;
+};
+
+EboxUsage.prototype.get = function(code, done) {
     var options = {
         host: 'consocable.electronicbox.net',
         path: '/index.php?actions=list&lng=fr&code=' + code
     };
 
+    var that = this;
     http.request(options, function (response) {
         var html = '';
         response.on('data', function (chunk) {
@@ -15,8 +20,10 @@ exports.get = function(code, done) {
         });
 
         response.on('end', function () {
-            done(html);
+            done(that.parser.parseUsage(html));
         });
     }).end();
 };
+
+module.exports = EboxUsage;
 

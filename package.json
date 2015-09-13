@@ -12,6 +12,7 @@
     "node": "0.12.x"
   },
   "dependencies": {
+    "moment": "^2.10.6",
     "nodemailer": "^1.4.0"
   },
   "devDependencies": {

@@ -3,13 +3,13 @@
 
     var fs = require("fs");
     var assert = require("assert");
-    var parser = require("../src/parser");
+    var parser = require("../src/ebox-parser");
 
     describe("Parsing ebox html", function () {
 
         var html = "";
         beforeEach(function () {
-            html = fs.readFileSync(__dirname + "/data.html").toString();
+            html = fs.readFileSync(__dirname + "/data/data.html").toString();
         });
 
         it("returns usage", function () {
