@@ -5,21 +5,20 @@ var moment = require('moment');
 
 var Postman = function (credentials) {
     this.credentials = credentials;
-};
-
-Postman.prototype.send = function (message) {
-    var transporter = nodemailer.createTransport({
+    this.transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {user: this.credentials.user, pass: this.credentials.pass}
     });
+};
 
+Postman.prototype.send = function (message) {
     var mail = this.buildMail(message);
 
-    transporter.sendMail(mail, function (error, info) {
+    this.transporter.sendMail(mail, function (error, info) {
         if (error) {
             return console.log(error);
         }
-        console.log('Message sent: ' + info.response);
+        console.log('Message sent: ' + info.response + " - " + JSON.stringify(mail));
     });
 };
 
