@@ -13,13 +13,13 @@
         });
 
         it("returns usage", function () {
-            var usage = parser.parse(html);
+            var usage = parser.parseUsage(html);
 
             assert.equal(usage, "151.95 G")
         });
 
         it("returns -1 when usage not found", function () {
-            var usage = parser.parse("any html");
+            var usage = parser.parseUsage("any html");
 
             assert.equal(usage, -1)
         });

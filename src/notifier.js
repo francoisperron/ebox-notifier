@@ -1,33 +1,22 @@
-(function () {
-    "use strict";
+"use strict";
 
-    var nodemailer = require('nodemailer');
+var nodemailer = require('nodemailer');
 
-    var pass = process.env.GMAIL_PASS;
-    var to = process.env.TO;
-    exports.notify = function (usage) {
-        var transporter = nodemailer.createTransport({
-            service: 'Gmail',
-            auth: {
-                user: 'ebox.notifier@gmail.com',
-                pass: pass
-            }
-        });
+exports.notify = function (credentials, message) {
 
-        var date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-        var mailOptions = {
-            from: 'ebox-notifier <ebox.notifier@gmail.com>',
-            to: to,
-            subject: 'Utilisation Electronic Box - ' + date,
-            html: '<b>Utilisation: ' + usage + '</b>'
-        };
+    var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: { user: credentials.user,  pass: credentials.pass }
+    });
 
-        transporter.sendMail(mailOptions, function (error, info) {
-            if (error) {
-                return console.log(error);
-            }
-            console.log('Message sent: ' + info.response);
-        });
+    var mailOptions = {
+        from: message.from,  to: message.to,  subject: message.subject,  html: message.content
     };
 
-}());
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message sent: ' + info.response);
+    });
+};

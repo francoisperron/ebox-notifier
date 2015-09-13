@@ -3,7 +3,7 @@
 var startString = "<b>Total</b><br>";
 var stopString = "<br><div id='total_off'";
 
-exports.parse = function (html) {
+exports.parseUsage = function (html) {
     var start = html.indexOf(startString) + startString.length;
     var stop = html.indexOf(stopString);
 
