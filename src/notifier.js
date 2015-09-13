@@ -4,6 +4,7 @@
     var nodemailer = require('nodemailer');
 
     var pass = process.env.GMAIL_PASS;
+    var to = process.env.TO;
     exports.notify = function (usage) {
         var transporter = nodemailer.createTransport({
             service: 'Gmail',
@@ -16,7 +17,7 @@
         var date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
         var mailOptions = {
             from: 'ebox-notifier <ebox.notifier@gmail.com>',
-            to: 'fperron@gmail.com,philemon.perron@gmail.com',
+            to: to,
             subject: 'Utilisation Electronic Box - ' + date,
             html: '<b>Utilisation: ' + usage + '</b>'
         };
