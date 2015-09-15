@@ -11,7 +11,6 @@ Watcher.prototype.CheckUsage = function (eboxCode, personToNotify) {
         var message = { to: personToNotify, usage: usage };
         that.postman.send(message);
     });
-
 };
 
 module.exports = Watcher;

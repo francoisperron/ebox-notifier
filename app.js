@@ -6,7 +6,7 @@ var Watcher = require("./src/watcher");
 var Postman = require("./src/postman");
 
 var credentials = {
-    user: "ebox.notifier@gmail.com",
+    user: process.env.GMAIL_USER,
     pass: process.env.GMAIL_PASS
 };
 

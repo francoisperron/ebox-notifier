@@ -7,6 +7,7 @@ describe("the postman", function () {
     var Postman = require("../src/postman");
     var credentials = {user: "bill@bo.com", pass: "theringisevil"};
     var postman = new Postman(credentials);
+    var usage = {actual: 10, max: 100};
 
     it("build 'from' field using user in credentials", function () {
         expect(postman.buildFrom()).toBe("ebox-notifier <" + credentials.user + ">");
@@ -18,7 +19,7 @@ describe("the postman", function () {
     });
 
     it("build 'content' field using usage", function () {
-        expect(postman.buildContent("150.6 G")).toBe("<b>Utilisation: 150.6 G</b>");
+        expect(postman.buildContent(usage)).toBe("<b>Utilisation: 10 G</b><p>Maximum: 100 G</p>");
     });
 
     it("build 'content' non disponible when usage is -1", function () {
@@ -26,7 +27,7 @@ describe("the postman", function () {
     });
 
     it("build message", function () {
-        var message = {to: "bill", usage: "10 G"};
+        var message = {to: "bill", usage: usage};
         var mail = postman.buildMail(message);
 
         expect(mail.from).toBe(postman.buildFrom());

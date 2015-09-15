@@ -1,15 +1,17 @@
 "use strict";
 
-var startString = "<b>Total</b><br>";
-var stopString = "<div id='total_off'";
+var startString = "{ drawChart(";
 
 exports.parseUsage = function (html) {
     var start = html.indexOf(startString);
-    var stop = html.indexOf(stopString);
+    var usageStop = html.substring(start).indexOf(",");
+    var maxStop = html.substring(start).indexOf(")");
 
-    if (start == -1 || stop == -1) {
+    if (start == -1 || usageStop == -1 || maxStop == -1) {
         return -1;
     }
 
-    return html.substring(start + startString.length, stop - '<br>'.length);
+    var actual = html.substring(start + startString.length, start + usageStop);
+    var max = html.substring(start + usageStop + 2, start + maxStop);
+    return {actual: actual, max: max};
 };

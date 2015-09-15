@@ -9,7 +9,8 @@ describe("the internet usage watcher", function () {
     var eboxCode = "VLDSD";
     var personToNotify = "pierre paul paquin";
 
-    var ebox = new EboxUsage("151.95 G");
+    var aUsage = {actual: 151.95, max: 350};
+    var ebox = new EboxUsage(aUsage);
     var postman = new Postman();
     var watcher = new Watcher(ebox, postman);
 
@@ -17,7 +18,7 @@ describe("the internet usage watcher", function () {
         spyOn(postman, "send");
         watcher.CheckUsage(eboxCode, personToNotify);
 
-        var message = { to: personToNotify,  usage: "151.95 G" };
+        var message = {to: personToNotify, usage: aUsage};
         expect(postman.send).toHaveBeenCalledWith(message);
     });
 });
