@@ -17,7 +17,7 @@ describe("the postman", function () {
         expect(postman.buildSubject()).toBe("Utilisation Electronic Box - " + date);
     });
 
-    it("build message", function () {
+    it("build mail from message", function () {
         var message = {to: "bill", content: "content"};
         var mail = postman.buildMail(message);
 
