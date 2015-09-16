@@ -3,6 +3,7 @@
 var EboxUsage = require("./helpers/static-ebox-usage");
 var Postman = require("./helpers/mock-postman");
 var Watcher = require("../src/watcher");
+var htmlMail = require("../src/html-mail");
 
 describe("the internet usage watcher", function () {
 
@@ -18,7 +19,7 @@ describe("the internet usage watcher", function () {
         spyOn(postman, "send");
         watcher.CheckUsage(eboxCode, personToNotify);
 
-        var message = {to: personToNotify, usage: aUsage};
+        var message = {to: personToNotify, content: htmlMail.buildFrom(aUsage)};
         expect(postman.send).toHaveBeenCalledWith(message);
     });
 });

@@ -27,24 +27,17 @@ Postman.prototype.buildMail = function (message) {
         from: this.buildFrom(),
         to: message.to,
         subject: this.buildSubject(),
-        html: this.buildContent(message.usage)
+        html: message.content
     };
 };
 
-Postman.prototype.buildFrom = function () {
+Postman.prototype.buildFrom = function() {
     return "ebox-notifier <" + this.credentials.user + ">";
 };
 
-Postman.prototype.buildSubject = function () {
+Postman.prototype.buildSubject = function() {
     var date = moment(Date.now()).format("YYYY-MM-DD");
     return 'Utilisation Electronic Box - ' + date;
-};
-
-Postman.prototype.buildContent = function (usage) {
-    if (usage == -1) {
-        return '<b>Utilisation non disponible</b>'
-    }
-    return '<b>Utilisation: ' + usage.actual + ' G</b><p>Maximum: ' + usage.max + ' G</p>'
 };
 
 module.exports = Postman;
