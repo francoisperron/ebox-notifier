@@ -1,1 +1,0 @@
-donothingworker:  echo 0
