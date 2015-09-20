@@ -3,7 +3,7 @@
 [Electronicbox]:http://www.electronicbox.net/
 
 ### To run test
-npm run
+npm test
 
 ### To deploy on heroku
 - Create app
@@ -12,12 +12,10 @@ npm run
 heroku config:set GMAIL_USER=gmail user used to send emails
 heroku config:set GMAIL_PASS=das password (or application password)
 heroku config:set CONFIGS=[{"code":"EBOXCODE","to":"recipients emails separated by comas"}, ...]
+```
+- Disble heroku web runner
+```javascript
 heroku ps:scale web=0
 ```
 - npm run deploy
 - Create a daily scheduler in heroku to run bin/check-ebox
-
-
-### To do
-- Send regular emails only on friday
-- Send warning when at 95% of max usage
