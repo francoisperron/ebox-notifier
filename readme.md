@@ -26,4 +26,4 @@ npm run deploy
 ```
 - Create a daily [scheduler] in heroku to run bin/check-ebox
 
-[scheduler] https://scheduler.heroku.com/dashboard
+[scheduler]:https://scheduler.heroku.com/dashboard
