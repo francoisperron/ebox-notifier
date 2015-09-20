@@ -24,4 +24,6 @@ heroku ps:scale web=0
 ```javascript
 npm run deploy
 ```
-- Create a daily scheduler in heroku to run bin/check-ebox
+- Create a daily [scheduler] in heroku to run bin/check-ebox
+
+[scheduler] https://scheduler.heroku.com/dashboard
