@@ -18,7 +18,7 @@ Watcher.prototype.CheckUsage = function (eboxCode, personToNotify) {
             return;
         }
 
-        if (atFivePercentToBust(usage)) {
+        if (usageNearMaximum(usage)) {
             that.postman.send({to: personToNotify, content: warningMail.buildFrom(usage)});
             return;
         }
@@ -33,14 +33,14 @@ function usageUnavailable(usage) {
     return usage == -1;
 }
 
-function aFriday(that) {
-    that.today = that.today || new Date();
-    return that.today.getDay() == 5;
+function usageNearMaximum(usage) {
+    return 0.07 * usage.max >= usage.max - usage.actual;
 }
 
 
-function atFivePercentToBust(usage) {
-    return 0.05 * usage.max >= usage.max - usage.actual;
+function aFriday(that) {
+    that.today = that.today || new Date();
+    return that.today.getDay() == 5;
 }
 
 module.exports = Watcher;

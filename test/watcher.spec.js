@@ -28,9 +28,9 @@ describe("the internet usage watcher", function () {
         });
     });
 
-    describe("when usage at 5% of max or less", function () {
+    describe("when usage at 7% of max or less", function () {
 
-        var aHighUsage = {actual: 95, max: 100};
+        var aHighUsage = {actual: 93, max: 100};
         var ebox = new EboxUsage(aHighUsage);
         var postman = new Postman();
         var watcher = new Watcher(ebox, postman);
