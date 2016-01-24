@@ -13,6 +13,8 @@ Watcher.prototype.CheckUsage = function (eboxCode, personToNotify) {
 
     that.eboxUsage.get(eboxCode, function (usage) {
 
+        console.log(eboxCode + ":" + usage.actual);
+
         if (usageUnavailable(usage)) {
             that.postman.send({to: personToNotify, content: unavailableMail.build()});
             return;

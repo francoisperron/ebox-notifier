@@ -18,7 +18,7 @@ EboxUsage.prototype.get = function (code, done) {
 
     var options = {
         method: 'POST',
-        host: 'conso.electronicbox.net',
+        host: 'conso.ebox.ca',
         path: '/index.php',
         headers:{
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -26,8 +26,6 @@ EboxUsage.prototype.get = function (code, done) {
             'Content-Length': Buffer.byteLength(data)
         }
     };
-
-    //console.log('data: ' + data);
 
     var that = this;
     var req = http.request(options, function (response) {
