@@ -8,6 +8,7 @@ var Watcher = function (eboxUsage, postman) {
     this.eboxUsage = eboxUsage;
     this.postman = postman;
 };
+
 Watcher.prototype.CheckUsage = function (eboxCode, personToNotify) {
     var that = this;
 
@@ -26,6 +27,7 @@ Watcher.prototype.CheckUsage = function (eboxCode, personToNotify) {
         }
 
         if (aFriday(that)) {
+            usage.projection = calculateProjection(that, usage);
             that.postman.send({to: personToNotify, content: weeklyMail.buildFrom(usage)});
         }
     });
@@ -43,6 +45,16 @@ function usageNearMaximum(usage) {
 function aFriday(that) {
     that.today = that.today || new Date();
     return that.today.getDay() == 5;
+}
+
+function calculateProjection(that, usage) {
+    that.today = that.today || new Date();
+    var ratio = daysInMonth(that.today.getMonth(), that.today.getYear()) / that.today.getDate();
+    return Math.round(ratio * usage.actual);
+}
+
+function daysInMonth(month,year) {
+    return new Date(year, month, 0).getDate();
 }
 
 module.exports = Watcher;

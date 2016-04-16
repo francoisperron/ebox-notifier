@@ -54,7 +54,7 @@ describe("the internet usage watcher", function () {
     });
 
     describe("when usage is normal", function () {
-        var aUsage = {actual: 151.95, max: 350};
+        var aUsage = {actual: 151.95, projection: 1511, max: 350};
         var ebox = new EboxUsage(aUsage);
         var postman = new Postman();
         var watcher = new Watcher(ebox, postman);
